@@ -1,0 +1,22 @@
+---
+import Layout from '@/layouts/Layout.astro';
+---
+
+<Layout title="Enlace Expirado">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="text-center">
+          <h1>¡Enlace Expirado!</h1>
+          <p>Estamos redireccionándote a la página principal...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    setTimeout(() => {
+      window.location.href = '/';
+    }, 5000);
+  </script>
+</Layout>
