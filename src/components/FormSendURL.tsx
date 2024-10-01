@@ -71,7 +71,7 @@ export function FormSendURL() {
     setLoading(true);
     try {
       if (!values.url) throw new Error('URL no válida');
-      const res = await fetch('http://localhost:8080/shorturl', {
+      const res = await fetch('http://localhost:8080/api/shorturl', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -79,6 +79,7 @@ export function FormSendURL() {
         body: JSON.stringify(values),
       });
       const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Error al acortar la URL');
       setData({ ...data, shortURL: `http://localhost:4321/${data.shortURL}` });
       toast({
         title: 'Enlace generado exitosamente',
