@@ -12,6 +12,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { useToast } from '@/hooks/use-toast';
 import type { ShortUrlEntry } from '@/types/shortURLentry';
 import handleCopy from '@/utils/handleCopy';
 import { useState } from 'react';
@@ -27,11 +28,15 @@ import {
 import { Input } from './ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { ToastAction } from './ui/toast';
-import { useToast } from './ui/use-toast';
 const formSchema = z.object({
-  url: z.string().min(2, {
-    message: 'URL no válida',
-  }),
+  url: z
+    .string()
+    .min(2, {
+      message: 'URL no válida',
+    })
+    .url({
+      message: 'URL no válida',
+    }),
 });
 
 export function FormSendURL() {
@@ -93,10 +98,12 @@ export function FormSendURL() {
       form.reset();
     } catch (error) {
       console.error(error);
+      const message =
+        error instanceof Error ? error.message : 'Error desconocido';
       toast({
         variant: 'destructive',
         title: 'Error al generar el enlace',
-        description: 'Por favor, intenta de nuevo.',
+        description: message,
         action: (
           <ToastAction
             altText="Reintentar"
@@ -131,6 +138,7 @@ export function FormSendURL() {
             </CardHeader>
             <Form {...form}>
               <form
+                method="POST"
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-8"
               >
