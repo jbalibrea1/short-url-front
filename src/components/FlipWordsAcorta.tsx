@@ -1,16 +1,12 @@
-import { FlipWords } from '@/components/ui/flip-words';
+import { FlipWords } from './ui/flip-words';
 
 export function FlipWordsAcorta() {
-  const words2 = ['fácil', 'rápido', 'seguro', 'gratis', 'única'];
-  const words = ['tWCFTe5wIR', 'bij-6cwIg', 'zvf1ntwIg', 'uxF1ewwIg'];
+  const words = ['tWCFTe5wIR', 'uxF1ewwIg'];
 
   return (
-    <div className="flex items-center ">
-      <div
-        // className="text-4xl mx-auto font-normal text-neutral-600 dark:text-neutral-400"
-        className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl tex2t-primary/80 dark:text2-primary/80"
-      >
-        acorta.ly/
+    <div className="flex items-center max-w-full pb-5 relative overflow-hidden">
+      <div className="scroll-m-20 text-xl md:text-4xl lg:text-5xl font-extrabold tracking-tight tex2t-primary/80 dark:text2-primary/80  ">
+        /
         <FlipWords
           words={words}
           duration={1000}

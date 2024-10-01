@@ -40,6 +40,8 @@ export function FormSendURL() {
   const [data, setData] = useState<Partial<ShortUrlEntry>>({});
   const { toast } = useToast();
 
+  const URL_API = 'http://localhost:8080/api/shorturl';
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -71,7 +73,7 @@ export function FormSendURL() {
     setLoading(true);
     try {
       if (!values.url) throw new Error('URL no válida');
-      const res = await fetch('http://localhost:8080/api/shorturl', {
+      const res = await fetch(URL_API, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -86,20 +88,8 @@ export function FormSendURL() {
         description: `${new Date().toLocaleDateString(
           'es-ES'
         )} - ${new Date().toLocaleTimeString()}`,
-        // action: (
-        //   <ToastAction
-        //     altText="Copiar enlace"
-        //     onClick={() => handleCopy(data.shortURL, toast)}
-        //   >
-        //     <CopyIcon />
-        //   </ToastAction>
-        // ),
       });
       setOpen(true);
-      // action: {
-      //     label: 'Undo',
-      //     onClick: () => console.log('Undo'),
-      //   },
       form.reset();
     } catch (error) {
       console.error(error);
@@ -107,7 +97,14 @@ export function FormSendURL() {
         variant: 'destructive',
         title: 'Error al generar el enlace',
         description: 'Por favor, intenta de nuevo.',
-        action: <ToastAction altText="Try again">Try again</ToastAction>,
+        action: (
+          <ToastAction
+            altText="Reintentar"
+            onClick={form.handleSubmit(onSubmit)}
+          >
+            Reintentar
+          </ToastAction>
+        ),
       });
     } finally {
       setLoading(false);
@@ -177,7 +174,7 @@ export function FormSendURL() {
               <CardDescription>
                 Genera un enlace único para compartirlo fácilmente.
               </CardDescription>
-            </CardHeader>{' '}
+            </CardHeader>
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
@@ -204,23 +201,7 @@ export function FormSendURL() {
                   </div>
                 </CardContent>
                 <CardFooter className="flex justify-end">
-                  <Button type="submit">Generar enlace</Button>
-                  <Button
-                    onClick={() =>
-                      toast({
-                        variant: 'destructive',
-                        title: 'Error al generar el enlace',
-                        description: 'Por favor, intenta de nuevo.',
-                        action: (
-                          <ToastAction altText="Try again">
-                            Try again
-                          </ToastAction>
-                        ),
-                      })
-                    }
-                  >
-                    toast test
-                  </Button>
+                  <Button type="submit">Personalizar QR</Button>
                 </CardFooter>
               </form>
             </Form>

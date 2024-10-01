@@ -29,6 +29,7 @@ export function AlertDialogShort({
   setOpen,
   handleCopyAndClose,
 }: AlertDialogDemoProps) {
+  if (!data.shortURL) return null;
   return (
     <AlertDialog open={open}>
       <AlertDialogContent>
@@ -48,14 +49,16 @@ export function AlertDialogShort({
           readOnly
           iconClick={handleIconClick}
         />
-        <AlertDialogFooter className="flex justify-between items-center  ">
-          <QRCodeGenerator content={`http://localhost:4321/${data.shortURL}`} />
-          <AlertDialogCancel onClick={() => setOpen(false)}>
-            Cerrar
-          </AlertDialogCancel>
-          <AlertDialogAction onClick={handleCopyAndClose}>
-            <CopyIcon /> Copiar y cerrar
-          </AlertDialogAction>
+        <AlertDialogFooter className="flex justify-between">
+          <QRCodeGenerator content={data.shortURL} />
+          <div className="flex gap-2 items-end">
+            <AlertDialogCancel onClick={() => setOpen(false)}>
+              Cerrar
+            </AlertDialogCancel>
+            <AlertDialogAction onClick={handleCopyAndClose}>
+              <CopyIcon /> Copiar y cerrar
+            </AlertDialogAction>
+          </div>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
