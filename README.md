@@ -19,7 +19,7 @@ To run this project, you need to have the following installed:
 This frontend requires a connection to one of the APIs available at [short-url-back](https://github.com/jbalibrea1/short-url-back) to work correctly. You can choose between two backend implementations:
 
 - **Go API**: For the Go version, follow the instructions in the [Go backend README](https://github.com/jbalibrea1/short-url-back/tree/main/back-go).
-- **Express API**: For the Node.js with Express version, follow the instructions in the [Express backend README](https://github.com/jbalibrea1/short-url-back/tree/main/api-express).
+- **Express API**: For the Node.js with Express version, follow the instructions in the [Express backend README](https://github.com/jbalibrea1/short-url-back/tree/main/back-express).
 
 ## Running the Project
 
