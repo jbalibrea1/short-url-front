@@ -1,6 +1,8 @@
 async function getLinkUrl(shortURL) {
   try {
-    const response = await fetch(`http://localhost:8080/shorturl/${shortURL}`);
+    const response = await fetch(
+      `http://localhost:8080/api/shorturl/${shortURL}`
+    );
     const data = await response.json();
     return data.url;
   } catch (error) {
